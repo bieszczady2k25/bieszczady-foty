@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pokaz slajdów</title>
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      color: white;
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+    #slideshow, #auth {
+      display: none;
+    }
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+    input {
+      padding: 10px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="login">
+  <p>Wprowadź hasło, aby zobaczyć zdjęcia:</p>
+  <input type="password" id="password" placeholder="Hasło" />
+</div>
+
+<div id="slideshow">
+  <img id="image" src="foto1.jpg" alt="Pokaz slajdów">
+</div>
+
+<script>
+  const correctPassword = "bieszczady2k25"; // <<< TUTAJ WPISZ SWOJE HASŁO
+  const images = [
+    "foto1.jpg", "foto2.jpg", "foto3.jpg", "foto4.jpg", "foto5.jpg",
+    "foto6.jpg", "foto7.jpg", "foto8.jpg", "foto9.jpg", "foto10.jpg"
+  ];
+  let index = 0;
+
+  const passwordInput = document.getElementById("password");
+  const loginDiv = document.getElementById("login");
+  const slideshowDiv = document.getElementById("slideshow");
+  const image = document.getElementById("image");
+
+  passwordInput.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+      if (passwordInput.value === correctPassword) {
+        loginDiv.style.display = "none";
+        slideshowDiv.style.display = "block";
+        startSlideshow();
+      } else {
+        alert("Niepoprawne hasło!");
+      }
+    }
+  });
+
+  function startSlideshow() {
+    setInterval(() => {
+      index = (index + 1) % images.length;
+      image.src = images[index];
+    }, 5000);
+  }
+</script>
+
+</body>
+</html>
+
